@@ -5,9 +5,11 @@ blogging app using Django
 
 command-line:
 
-python manage.py fake <count> --clear
- count: number of users and posts to be created
- --clear (optional): will delete all records in the database except for admins
+	python manage.py fake <count> --clear
+
+	count: number of users and posts to be created
+
+	--clear (optional): will delete all records in the database except for admins
 
 
 # Features
