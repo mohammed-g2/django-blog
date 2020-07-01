@@ -1,13 +1,13 @@
 .vscode
-.sqlite3
+*.sqlite3
+*.jpg
+*.png
 todo.txt
-.jpg
-.png
 
 # javascript
 node_modules
 
 # python
 venv
-.pyc
+*.pyc
 __pycache__
