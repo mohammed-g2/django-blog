@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if page_obj.object_list %}
+<div>
+    {% if page_header %}
+        <legend class="border-bottom mb-5">{{ page_header }}</legend>
+    {% endif %}
+    {% for post in page_obj.object_list %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2><a href="{% url 'blog:post' post.id %}" class="post-title">{{ post.title }}</a></h2>
+            <p class="border-bottom">
+                By <a href="{% url 'user:profile' post.author.username %}">{{ post.author }}</a>, 
+                <small class="text-muted">{{ post.date|date:"d F, Y" }}</small></p>
+            <p class="card-text post-content">
+                {{ post.partial_content }} ... <a href="{% url 'blog:post' post.id %}">Continue reading</a>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="d-flex justify-content-center">
+    {% include "blog/_pagination.html" %}
+</div>
+{% else %}
+<div class="content-section">
+    <h3>No Posts!</h3>
+</div>
+{% endif %}
+{% endblock content %}

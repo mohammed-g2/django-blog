@@ -1,0 +1,158 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--#### CSS ####-->
+    <!-- Third-party CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <!--#### End CSS ####-->
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Welcome!</title>
+    {% endif %}
+</head>
+
+<body>
+    <!-- class page-container warps all but footer -->
+    <div class="page-container">
+    <!--#### Begin Navbar ####-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pl-4 pr-5">
+        <a class="navbar-brand" href="{% url 'blog:home' %}">CMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:home' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:create_post' %}">Create Post</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:about' %}">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}">Dashboard</a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user:profile' user.username %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user:logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user:register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!--#### End Navbar ####-->
+
+    <!--#### Begin Main ####-->
+    <main class="container mt-3">
+        <div class="row">
+            <!--### Begin Content ###-->
+            <div class="col-md-8">
+                
+                <!--### Messages ###-->
+                
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading">Hello</h4>
+                    <p>This website is for showcase purposes, all data here are fake</p>
+                    <hr>
+                    <p class="mb-0">view <a href="">github repo</a></p>
+                </div>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <!--### End Messages ###-->
+
+                {% block content %}{% endblock %}
+            </div>
+            <!--### End Content ###-->
+
+            <!--### Begin Sidebar ###-->
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Sidebar</h3>
+                    <p class="text-muted">Latest new and announcements</p>
+                    <ul class="list-group">
+                        <a class="list-group-item bg-light" href="#">
+                            Latest News
+                        </a>
+                        <a class="list-group-item bg-light" href="#">
+                            Featured
+                        </a>
+                        {% if user.is_authenticated %}
+                        <a class="list-group-item bg-light" href="{% url 'blog:user_posts' user.username %}">
+                            My Posts
+                        </a>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <!--#### End Sidebar ####-->
+        </div>
+    </main>
+    <!--#### End Main ####-->
+    </div>
+
+    <footer class="bg-dark text-light mt-3 p-2">
+        <span>all rights reserved &copy; 2020</span> | 
+        <span><a href="{% url 'blog:terms' %}" class="text-light">Terms</a></span> |
+        <span><a href="{% url 'blog:about' %}" class="text-light">About</a></span>
+    </footer>
+
+    <!--#### JavaScript ####-->
+    <!-- Third-party Javascript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <!-- project Javascript -->
+    <script src=""></script>
+    <!--#### End JavaScript ####-->
+</body>
+
+</html>

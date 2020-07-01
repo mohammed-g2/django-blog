@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <img class="mr-3 profile-image" src="{{ profile_owner.profile.image.url }}" alt="user avatar">
+        <div class="media-body">
+            <h5>{{ profile_owner.username }}</h5>
+            <p class="text-secondary">{{ profile_owner.email }}</p>
+            <p>{{ profile_owner.profile.bio }}</p>
+            <p style="text-decoration:underline;color:#007bff;">
+                <a href="{% url 'blog:user_posts' profile_owner.username %}">View more posts by this user</a>
+            </p>
+        </div>
+    </div>
+
+    {% if user_form %}
+    <div class="mt-5">
+        <legend class="mb-3 border-bottom">Profile Info</legend>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            <input type="submit" value="update" class="btn btn-dark">
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

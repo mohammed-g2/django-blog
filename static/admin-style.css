@@ -1,0 +1,87 @@
+/*** general styles ****/
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+caption {
+    /* captions are in: login page, index page */
+    background: #343a40 !important;
+    color: white;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: capitalize !important;
+}
+
+.help {
+    font-size: 13px !important;
+    color: #000000 !important;
+}
+
+.help > ul > li {
+    font-size: 13px !important;
+    color: #000000 !important;
+}
+
+/* header (navbar) styles */
+#site-name > a {
+    color: white !important;
+}
+
+#header {
+    background-color: #343a40;
+    color: rgba(255, 255, 255, .75);
+}
+
+#user-tools, #user-tools > a {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize !important;
+}
+
+#user-tools > a {
+    margin-right: 15px;
+}
+
+/* bread crumbs styles */
+.breadcrumbs {
+    background: #1e2022 !important;
+    color: white;
+}
+
+
+/*** styles specific to pages ***/
+
+
+/* database table styles */
+/* filters header */
+#changelist-filter > h2 {
+    background-color: #343a40;
+    color: rgba(255, 255, 255, .75);
+}
+
+.actions > label, .actions > span {
+    color: #000000;
+}
+
+
+/* edit record page styles */
+input[name="_continue"], input[name="_addanother"] {
+    color: #000 !important;
+}
+.selector-chosen > h2 {
+    background-color: #343a40;
+}
+
+.module > h2 {
+    background-color: #343a40;
+}
+
+
+/* login page */
+.submit-row > input[value="Log in"] {
+    background-color: #343a40;
+}
+
+.submit-row > input[value="Log in"]:hover {
+    background-color: #575e64;
+}

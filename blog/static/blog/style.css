@@ -1,0 +1,13 @@
+.post-title {
+    color: #444444;
+}
+
+.post-content {
+    white-space: pre-line;
+}
+
+.post-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
